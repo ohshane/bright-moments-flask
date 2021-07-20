@@ -17,6 +17,12 @@ Usage: %s <face id>
 
 FIELDS = 'face_id crop_width crop_height crop_x0 crop_y0 yaw pitch roll left_eye_x0 left_eye_y0 left_eye_x1 left_eye_y1 right_eye_x0 right_eye_y0 right_eye_x1 right_eye_y1 mouth_x0 mouth_y0 mouth_x1 mouth_y1'.split()
 
+def getLines(fname):
+	"""Returns the lines split by '\t' where the first element is the given id"""
+	lines = (l.strip().split('\t') for l in open(fname) if not l.startswith('#'))
+	lines = [l for l in lines]
+	return lines
+
 def getLinesById(id, fname):
 	"""Returns the lines split by '\t' where the first element is the given id"""
 	lines = (l.strip().split('\t') for l in open(fname) if not l.startswith('#'))
