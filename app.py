@@ -30,7 +30,7 @@ def gen_frames():  # generate frame by frame from camera
         if frame is None:
             print('--(!) No captured frame -- Break!')
             break
-        detectAndDisplay(frame)
+        frame, faceROI = detectAndDisplay(frame)
         ret, buffer = cv2.imencode('.jpg', frame)
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
