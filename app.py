@@ -14,7 +14,7 @@ app = Flask(__name__)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 device = "cpu"
 model = CNN()
-checkpoint = Path(__file__).parent/"model"/"bi_noise"/"model-cnn-epoch-17.pth"
+checkpoint = Path(__file__).parent/"model"/"bi"/"model-cnn-epoch-18.pth"
 model.load_state_dict(torch.load(checkpoint, map_location=device), strict=False)
 trans = transforms.Compose([
     transforms.Resize((48, 48)),   
