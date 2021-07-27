@@ -10,16 +10,17 @@ def detectAndDisplay(frame):
     faces = face_cascade.detectMultiScale(frame_gray)
     for (x,y,w,h) in faces:
         center = (x + w//2, y + h//2)
-        frame = cv.ellipse(frame, center, (w//2, h//2), 0, 0, 360, (255, 0, 255), 4)
+        # frame = cv.ellipse(frame, center, (w//2, h//2), 0, 0, 360, (255, 0, 255), 4)
+        frame = cv.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 1)
         faceROI = frame_gray[y:y+h,x:x+w]
         #-- In each face, detect eyes
-        eyes = eyes_cascade.detectMultiScale(faceROI)
-        for (x2,y2,w2,h2) in eyes:
-            eye_center = (x + x2 + w2//2, y + y2 + h2//2)
-            radius = int(round((w2 + h2)*0.25))
-            frame = cv.circle(frame, eye_center, radius, (255, 0, 0 ), 4)
+        # eyes = eyes_cascade.detectMultiScale(faceROI)
+        # for (x2,y2,w2,h2) in eyes:
+        #     eye_center = (x + x2 + w2//2, y + y2 + h2//2)
+        #     radius = int(round((w2 + h2)*0.25))
+        #     frame = cv.circle(frame, eye_center, radius, (255, 0, 0 ), 4)
     # cv.imshow('Capture - Face detection', frame)
-    return frame
+    return frame, faceROI
     
 parser = argparse.ArgumentParser(description='Code for Cascade Classifier tutorial.')
 parser.add_argument('--face_cascade', help='Path to face cascade.', default='data/haarcascades/haarcascade_frontalface_alt.xml')
