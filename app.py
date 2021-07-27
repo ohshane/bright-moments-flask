@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response
 import cv2
+from cascade import detectAndDisplay
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ def gen_frames():  # generate frame by frame from camera
         if not success:
             break
         else:
+            frame = detectAndDisplay(frame)
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
